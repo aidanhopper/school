@@ -1,0 +1,3 @@
+#+TITLE: School Projects, Homework and Labs
+
+* This repo is meant to store all my programming school work
