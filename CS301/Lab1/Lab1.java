@@ -9,7 +9,11 @@ public class Lab1
      */
     private static int problem1(int[] arr, int i, int j)
     {
-      return 0;//remove this line 
+	// base case
+	if (i >= j) return arr[i];
+	// returns range starting on whichever number is largest 
+	if (arr[i] >= arr[j]) return problem1(arr, i, j - 1);
+	return problem1(arr, i + 1, j);
     }
 
     /**
@@ -17,7 +21,11 @@ public class Lab1
      */
     private static void problem2(int[] arr, int i, int j)
     {
-    
+	// base case
+	if (i >= j) return;
+	// swaps specified incicies then moves range inwards
+	swap(arr, i, j);
+	problem2(arr, i + 1, j - 1);
     }
 
     /**
@@ -25,14 +33,9 @@ public class Lab1
      */
     private static void swap(int[] arr, int i, int j)
     {
-     
-     //x = 10
-     //y = 5
-     
-     //temp = x
-     //x = y
-     //y = temp
-     
+	int temp = arr[j];
+	arr[j] = arr[i];
+	arr[i] = temp;
     }
 
     // ---------------------------------------------------------------------
