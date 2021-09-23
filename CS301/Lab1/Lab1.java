@@ -11,11 +11,10 @@ public class Lab1
     {
 	// base case
 	if (i >= j) return arr[i];
-	// returns range starting on whichever number is largest 
+	// recursive case 
 	if (arr[i] >= arr[j]) return problem1(arr, i, j - 1);
 	return problem1(arr, i + 1, j);
     }
-
     /**
      *  Problem 2: Reverse a specific range in a given array.
      */
@@ -23,7 +22,7 @@ public class Lab1
     {
 	// base case
 	if (i >= j) return;
-	// swaps specified incicies then moves range inwards
+	// recursive case
 	swap(arr, i, j);
 	problem2(arr, i + 1, j - 1);
     }
