@@ -1,1 +1,1 @@
-java Lab1.java
+java ~/Projects/school/CS301/Lab1/Lab1.java
