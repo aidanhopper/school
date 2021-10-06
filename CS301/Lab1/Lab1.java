@@ -1,9 +1,7 @@
-import java.io.*;
 import java.util.*;
 
 public class Lab1
 {
-
     /**
      *  Problem 1: Finds the largest number in a specific range of the given array.
      */
@@ -11,9 +9,10 @@ public class Lab1
     {
 	// base case
 	if (i >= j) return arr[i];
-	// recursive case 
+	// recursive case
 	if (arr[i] >= arr[j]) return problem1(arr, i, j - 1);
-	return problem1(arr, i + 1, j);
+        
+        return problem1(arr, i + 1, j);
     }
     /**
      *  Problem 2: Reverse a specific range in a given array.
@@ -26,7 +25,6 @@ public class Lab1
 	swap(arr, i, j);
 	problem2(arr, i + 1, j - 1);
     }
-
     /**
      *  Swap the items at index i and j of the given array.
      */
