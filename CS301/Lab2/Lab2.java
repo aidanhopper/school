@@ -13,9 +13,12 @@ public class Lab2
      */
     private static boolean problem1(int[] arr, int i, int j)
     {
+      // 2 base cases
+      // returns false if range == index
       if (i == j) return false;
+      // returns true if two consecutive numbers are equal
       if (arr[i] == arr[i + 1]) return true;
-      if (i+1 >= j) return false;
+      // recursive case increments index by one
       return problem1(arr, i+1, j);
     }
 
@@ -24,8 +27,11 @@ public class Lab2
      */
     private static boolean problem2(int[] arr, int i, int j)
     {
+        // base case
         if (i >= j) return true;
+        // recursive case
         if (arr[i] == arr[j]) return problem2(arr, i+1, j-1);
+        // returns false if base case is not met
         return false;
     }
 

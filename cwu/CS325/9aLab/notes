@@ -1,0 +1,29 @@
+COMMENTS
+- Suggestions arent specific. Wants more authentication options but doesn't suggest any under the suggestions section.
+- The article is well structured, the transitions between the sections are smooth and build off eachother. 
+- Needs more clarity surrounding the point of addressing dictionary attacks. Should state that password strength is rated based on its resistance to dictionary attacks, but dictionary attacks arent a problem compared to other types of attacks.
+- Tables have a nice style, could do with higher resolution.
+
+SUMMARY NOTES
+- Passwords are needed for all types of accounts with many different types of service providers.
+- Authentication rules vary between services.
+- Current authentication rules work when you only have one account, but people have many different accounts.
+- The US Goverenments Password Management Guideline (The Green Book) written in 1985 was good at the time of publishing but is dfated with old assumptions about technology.
+- The Green Book is the basis for most current password rules.
+- The Green Books advice for authentication has a few problems in the modern era:
+ 1. Users must remember their passwords, this is simply not feasible in todays world with so many differnt accounts being used.
+ 2. Password recovery is not as simple as changing it anymore. Once an account is compromised accounts on other services with the same password can also be compromised.
+- It isn't reasonable to expect people to create and remember passwords that are resistant to dictionary attacks.
+- Dictionary attacks are rare in the modern era, more common attacks are keyloggers, phishing, password files from poorly protected servers, 
+
+AUTHORS GOAL: Point out the good and bad of todays password standards, and offer suggestions to better adapt password standards to the modern internet.
+
+METHODS: 
+1. Measured # of root processes on different OS's, and used the table to show that there are many potential vulnerablilities on Unix-like systems. This is good because it serves the broader point that the system is a bigger vulnurability than the password itself. Should be placed further down in the article with the section that explains the password itself is not vulnurable but client and server are, ex keyloggers, phishing and poorly protected servers.
+2. Measured time to crack passwords of different lengths and styles using dictionary attacks of different speeds. This method seemed pointless because it is undermined by the author stating that dictionary attacks aren't an issue compared to other types of attacks.
+
+IS THE CONCLUSION SUPPORTED?
+- Wants more general password rules that are easier for the layperson to understand.
+
+RECOMMENDATION
+Publish with minor changes to improve clarity.

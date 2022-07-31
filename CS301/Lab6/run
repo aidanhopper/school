@@ -1,0 +1,3 @@
+#!/bin/bash
+# javac StackLinkedList.java
+java Lab5.java

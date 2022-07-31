@@ -1,0 +1,3 @@
+#!/bin/bash
+javac Lab1.java BST.java
+java Lab1 BST

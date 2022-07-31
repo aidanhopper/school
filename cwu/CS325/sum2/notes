@@ -1,0 +1,171 @@
+Summary of each paragraph/section
+
+
+DISCLAIMER
+1. IEEE Standards are developed within IEEE societies through the consensus of volunteers. 
+2. Use of IEEE Standard is not required.
+3. IEEE Standards are supplied "AS IS".
+4. IEEE Standards are reviewed every 5 years.
+
+
+INTRODUCTION
+1. IEEE specification of software requirements standards (SRS) are meant to assist the customer and supplier.
+2. A proper SRS should provide 5 benefits: establish the software function, reduce development effort, provide a realistic basis for estimating costs, create a standard for transfer between users and machines, and create a basis for continual development.
+
+
+SCOPE OF STANDARDS
+1. Describes content and qualities of a good software requirements specification (SRS). This standard only applies to pre-development software. Software that's embedded in larger systems will have issues beyond the scope of these standards. These recommended practices describe the process of creating an SRS and its content.
+
+
+CONSIDERATIONS FOR PRODUCING A GOOD SRS
+1. The are 8 things to consider before writing an SRS: it's nature, the environment, the characteristics of a good SRS, joint preparation, it's continual development, it's design, and embedding project requirements.
+
+
+NATURE OF THE SRS
+1. An SRS should address the functionality of the software, explore how the software interacts with its environment, explore said software's performance, discuss its specific attributes like portability between machines, and discuss implementation constraints like programming language.
+
+
+ENVIRONMENT OF THE SRS
+1. Depending on weather the software is inside a larger system, there may need to be an SRS that discusses how the software interfaces with the larger system.
+2. The SRS has a specific role in development. It should correctly identify software requirements, should not describe design or implementation details, and should not impose additional constraints of software outside of hardware requirements.
+
+
+CHARACTERISTICS OF A GOOD SRS
+1. A good SRS has multiple qualities: correct, unambiguous, consistent, modifiable, traceable and verifiable.
+2. The SRS is correct if every requirement stated is met by the software.
+3. The SRS is unambiguous if every requirement has one interpretation. An SRS should be reviewed by an independent party to identify ambiguous use of language. A way to avoid ambiguity based on language is to use a requirements specification language, which detects many types of language errors. This issue with this approach is that these languages take a long time to learn and non-technical users wont be able to read it. Requirements specification languages also address certain types of requirements which may influence the quality of the SRS.
+
+
+REPRESENTATION TOOLS
+1.There are multiple different approaches that requirements methods, languages and their tools fall into. These are object, process, and behavioral. The approach that is recommended depends on the size and complexity of the software. When using these approaches, it is best to contain a natural language description along with a requirements specification language.
+
+
+COMPLETE
+1. An SRS is complete if it contains all significant requirements. Contain specification on responses the software can output, and elaborate on if the response is to valid or invalid input values. include full labels and references on all different tables and diagrams. Any SRS that includes a "to be determined" is not complete without proper specification.
+
+
+CONSISTENCY
+1. An SRS's requirements should be internally consistent with higher level documents.
+
+
+RANKED FOR IMPORTANCE AND/OR STABILITY
+1. Each requirement in an SRS needs to indicate its importance or stability. Some requirements could be essential, and some could just be desirable. 
+2. There are two ways to rank requirements: through stability and necessity. Stability is expressed through the expected changes to a requirement based on knowledge of future events. While necessity ranks requirements as essential, conditional, or optional.
+
+
+VERIFIABLE
+1. An SRS is verifiable if every requirement has some cost-effective process to check if the software meets the requirements. An ambiguous requirement is not a verifiable requirement.
+
+
+MODIFIABLE
+1. An SRS is modifiable if the structure and style can be changed to suit new requirements if necessary. The SRS must be coherent, lack redundancy and express each requirement separately. 
+
+
+TRACEABLE
+1. An SRS is traceable if the origin of its requirements are clear. There are two types of traceability, forward and backward. Documents in previous stages of development and documents after. Forward traceability is important because it also contributes to an SRSs modifiability.
+
+
+JOINT PREP OF THE SRS
+1. An SRS should be jointly prepared by both the customer and supplier. This is because customers usually do not understand software design, and suppliers do not understand the scope of the customers problem. This ensures the production of a wholistic SRS.
+
+
+SRS EVOLUTION
+1. The SRS will evolve through out the development process. This is due to discovering deficiencies and inaccuracies.
+2. Requirements should be as thorough as possible for current knowledge. Incompleteness of requirements should be noted.
+3. A formal process should be initiated to control for projected changes
+
+
+EMBEDDING DESIGN
+1. The SRS should describe how to software is designed. This includes specifying what functions are performed on what data.
+2. Some requirements can restrict the way the software is designed.
+
+
+EMBEDDING PROJECT REQUIREMENTS
+1. Project requirements such as cost and delivery schedules shall not be included in the SRS because they are included in other documents.
+
+
+SRS OUTLINE
+1. A good SRS should contain the following items: An introduction which specifies the purpose of the software, its scope, and definitions of words used throughout the document, and references; a description which includes its assumptions/dependencies, characteristics of the user, the perspective of the product and its constraints; and lastly the software's specific requirements.
+
+
+INTRODUCTION (SECTION 1)
+1. Should provide a broad overview of the SRS.
+2. The purpose should explain the purpose and intended audience of the SRS.
+3. The scope should identify the software by name, explain if necessary what the software will not do, and describe the software's application.
+4. The definitions section should provide definitions for all terms as necessary to be referenced by the SRS's appendix.
+5. The references should provide a list of documents referenced in the SRS. 
+6. The overview should describe what the rest of the SRS contains and how its organized.
+
+
+OVERALL DESCRIPTION (SECTION 2)
+1. Describes factors that affect requirements, but not the requirements themselves, it provides background for section 3.
+2. The overall description consists of product perspective, product functions, user characteristics, constraints, assumptions/dependencies, and apportioning of requirements. 
+
+
+PERSPECTIVE
+1. Perspective contains information on weather the product is part of some larger system or is self contained. It should also describe how the system operates under different constraints. These constraints include: system interfaces, user interfaces, hardware interfaces, software interfaces, communications interfaces, memory, operations, and site adaptation requirements.
+2. User interface should specify the logical characteristics of each interface, and all aspects of optimizing the interface with the user.
+3. Hardware interface should specify the logical characteristics of each interface between the software and hardware, including configuration, and what devices are supported.
+4. Software interfaces should specify the software's dependencies.
+5. Communications interfaces should specify the various interfaces to communications, such as network.
+6. Memory constraints should specify any applicable characteristics and limits on memory
+7. Operations should specify the normal and special operations required by the user.
+8. Site adaptation requirements should specify the requirements for any specific initialization sequences for a given site. This should also specify the features that need to be adapted to any installation.
+
+PRODUCT FUNCTIONS
+1.This section should provide a summary of the softwares functions. The functiuons should be organized in a way the customer can understand.
+
+
+USER CHARACTERISTICS
+1. Should describe general characteristics of the intended user, such as education level.
+
+
+CONSTRAINTS
+1. Should provide a list of things that will limit a developers options, such as regulatory policies or hardware limitiations. 
+
+
+ASSUMPTIONS AND DEPENDENCIES
+1. List of assumptions that effect the requirements stated in the document, such as an operating system being available on the hardware intended to run the software.
+
+
+APPORTIONING OF REQUIREMENTS
+1. Identifies requirements that are projected to be required in future versions of the software.
+
+
+SPECIFIC REQUIREMENTS (SECTION 3)
+1. Contains all software requirements to enable designers to build a system that satisfies thos requirements. Leaves no room for ambiguity. Should include a description of every input and output from the software.
+2. The priciples of requirements are: requirements should be organized, identifiable, and consitent with previous documents and user characteristics.
+
+EXTERNAL INTERFACES
+1. Detailed description of all inputs and outputs from the software.
+
+FUNCTIONS
+1. Functional requirements define the fundamental processes that take place in the software for processing inputs and outputs.
+
+PERFORMANCE REQUIREMENTS
+1. Specifies both static and dynamic numerical requirements. Static requirements do not change such as number of terminals supported. Dynamic requirements do change such as the amount of data being processed in a given amount of time.
+
+
+LOGICAL DATABASE REQUIREMENTS
+1. Specifies the logical requirements for information used by the system, such as what information is used by any given function.
+
+
+DESIGN CONSTRAINTS
+1. Specifies design constraints imposed by other standards.
+
+
+STANDARDS COMPLIANCE
+1. Should specify requirments derived from existing standards/regulations.
+
+
+SOFTWARE SYSTEM ATTRIBUTES
+1. Software system attributes identify factors such as reliability, availability, security, maintainability, and portability
+
+ORGANIZING THE SPECIFIC REQUIREMENTS
+1. Detailed requirements can be extensive so its recommended that careful though is put into their organization.
+2. There are multiple ways to orgainze specific requirements, such as system mode, user class, objects, feature, stimulus, respose, and functional heirarchy.
+3. Organizational techniques can be combined together to produce a readable SRS.
+
+SUPPORTING INFORMATION
+1. An SRS should include a table of contents, index and appendicies for ease of use.
+

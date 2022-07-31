@@ -1,0 +1,3 @@
+#!/bin/bash
+javac Lab3.java MinHeap.java
+java Lab3

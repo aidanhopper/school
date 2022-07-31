@@ -1,0 +1,92 @@
+!SESSION 2022-06-26 00:10:21.759 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=18.0.1.1
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.362
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.434
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.452
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.452
+!MESSAGE Initializing Java Language Server 1.12.0.202206011637
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.473
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.474
+!MESSAGE Non-Static Commands: [java.edit.organizeImports, java.project.refreshDiagnostics, java.project.import, java.navigate.openTypeHierarchy, java.project.removeFromSourcePath, java.project.listSourcePaths, java.project.resolveStackTraceLocation, java.project.getAll, java.project.isTestFile, java.project.getClasspaths, java.navigate.resolveTypeHierarchy, java.edit.stringFormatting, java.project.getSettings, java.project.updateSourceAttachment, java.project.resolveWorkspaceSymbol, java.project.upgradeGradle, java.project.resolveSourceAttachment, java.project.addToSourcePath]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.478
+!MESSAGE Wait for AutoBuildOffJob start
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.489
+!MESSAGE Wait for AutoBuildOffJob end 11ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.489
+!MESSAGE Starting org.eclipse.m2e.core
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.489
+!MESSAGE Started org.eclipse.m2e.core 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.490
+!MESSAGE ProjectRegistryRefreshJob finished 1ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.490
+!MESSAGE Starting org.eclipse.buildship.core
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.501
+!MESSAGE Started org.eclipse.buildship.core 11ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.511
+!MESSAGE LoadingGradleVersionJob finished 10ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.521
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.522
+!MESSAGE Creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.563
+!MESSAGE Finished creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.864
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.895
+!MESSAGE Workspace initialized in 383ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.921
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:22.924
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.187
+!MESSAGE Reconciled 1. Took 0 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.482
+!MESSAGE begin problem for /Lab2.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.483
+!MESSAGE 1 problems reported for /Lab2.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.486
+!MESSAGE Validated 1. Took 279 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.612
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.627
+!MESSAGE >> registerWatchers'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:23.628
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2022-06-26 00:10:30.858
+!MESSAGE >> shutdown
