@@ -7,7 +7,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-void init_board(char board[20][10]);
+typedef struct {
+  char board[10][10];
+} Player;
+
+void init_player(Player *player);
 void print_board(char board[20][10]);
+void welcome_screen();
+void clear();
+int place_method();
+
 
 #endif

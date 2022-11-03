@@ -1,2 +1,2 @@
 main:
-	cc main.c functions.c -lm
+	gcc main.c functions.c -lm

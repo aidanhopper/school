@@ -2,12 +2,17 @@
 
 int main() {
 
-  // rows 0-9 are player1, rows 10-19 are player2
-  char board[20][10];
-  init_board(board);
+  // player 1
+  Player player1;
+  init_player(&player1);
 
-  print_board(board);
+  // player 2
+  Player player2;
+  init_player(&player2);
 
+  welcome_screen();
+  clear();
+  char method = place_method();
 
   return 0;
 }
