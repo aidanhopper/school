@@ -13,6 +13,8 @@ int main() {
   welcome_screen();
   clear();
   char method = place_method();
+  place(&player1, method);
+  print_board(&player1);
 
   return 0;
 }

@@ -12,10 +12,10 @@ typedef struct {
 } Player;
 
 void init_player(Player *player);
-void print_board(char board[20][10]);
+void place(Player *player, int option);
+void print_board(Player *player);
 void welcome_screen();
 void clear();
 int place_method();
-
 
 #endif
