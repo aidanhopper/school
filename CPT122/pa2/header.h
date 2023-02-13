@@ -3,8 +3,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <unistd.h>
 
 typedef struct {
   int seconds;
@@ -12,10 +14,10 @@ typedef struct {
 } Duration;
 
 typedef struct {
-  char artist[20];
-  char album_title[20];
-  char song_title[20];
-  char genre[20];
+  char artist[30];
+  char album_title[30];
+  char song_title[30];
+  char genre[30];
   Duration duration;
   int times_played;
   int rating;
@@ -31,3 +33,4 @@ typedef struct node {
 
 int menu();
 void execute_option(Node **playlist, int option_selected);
+void store(Node **playlist);

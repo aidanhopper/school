@@ -11,6 +11,7 @@ int main()
     // exit the program
     if (option_selected == 11)
     {
+      store(&playlist);
       return 0;
     }
   
