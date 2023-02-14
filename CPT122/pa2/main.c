@@ -2,7 +2,10 @@
 
 int main()
 {
-  Node *playlist;
+  srand(time(NULL));
+
+  Node *playlist = NULL;
+
   while(1)
   {
     // displays the menu
@@ -17,7 +20,6 @@ int main()
   
     // if not exit then execute the option
     execute_option(&playlist, option_selected);
-    //rintf("%s\n", playlist->next->next->next->prev->data.artist);
-    //printf("%s\n", playlist->data.artist);
   }
+
 }

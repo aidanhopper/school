@@ -1,5 +1,4 @@
 #include "header.h"
-#include <string.h>
 
 int menu() {
   printf("(1)  load\n"
@@ -80,6 +79,35 @@ void print_list(Node *node, char *artist) {
   }
 }
 
+void print_list_backwards(Node *node)
+{
+  // go to back of list
+  while (node->next != NULL)
+  {
+    node = node->next;
+  }
+  int i = 1;
+  while (node != NULL)
+  {
+    printf("%s<-",node->data.artist);
+    node = node->prev;
+  }
+  printf("\n");
+
+}
+
+void print_list_small(Node *node)
+{
+  // go to back of list
+  while (node != NULL)
+  {
+    printf("%s->",node->data.artist);
+    node = node->next;
+  }
+  printf("\n");
+
+}
+
 void read_line(char line[], Record *record) {
   char *token;
 
@@ -142,30 +170,37 @@ Node *make_node(char *line) {
 
 int insert_front(Node **playlist, char *line) {
   Node *node = make_node(line);
-  if (node == NULL) {
+  if (node == NULL) 
+  {
     return 0;
   }
-  if (*playlist == NULL) {
+  if (*playlist == NULL) 
+    {
     node->next = NULL;
     node->prev = NULL;
     *playlist = node;
-  } else {
+  } 
+  else 
+  {
     node->next = *playlist;
     (*playlist)->prev = node;
+    //printf("%s\n",(*playlist)->prev->data.artist);
     node->prev = NULL;
     *playlist = node;
   }
   return 1;
 }
 
-void load(Node **playlist) {
+void load(Node **playlist)
+{
   // open file
   char *file_path = "musicPlayList.csv";
   FILE *file = fopen(file_path, "r");
   if (file == NULL)
     return;
 
-  while (1) {
+  while (1)
+  {
     // read in line
     char line[100];
     fgets(line, 100, file);
@@ -180,10 +215,13 @@ void load(Node **playlist) {
   fclose(file);
 }
 
-int str_contains_char(char *str, const char ch) {
+int str_contains_char(char *str, const char ch) 
+{
   char *c = str;
-  while (*c != '\0') {
-    if (*c == ch) {
+  while (*c != '\0')
+  {
+    if (*c == ch)
+    {
       return 1;
     }
     c = c + 1;
@@ -191,12 +229,16 @@ int str_contains_char(char *str, const char ch) {
   return 0;
 }
 
-void create_line(Record *data, char *line) {
+void create_line(Record *data, char *line) 
+{
   int artist_has_space = str_contains_char(data->artist, ' ');
   // check for space in artist name
-  if (artist_has_space) {
+  if (artist_has_space) 
+  {
     sprintf(line, "\"%s\",", data->artist);
-  } else {
+  } 
+  else 
+  {
     sprintf(line, "%s,", data->artist);
   }
 
@@ -234,6 +276,7 @@ void display(Node **playlist) {
   int option;
   scanf("%d%*c", &option);
   if (option == 1) {
+    //print_list(*playlist, NULL);
     print_list(*playlist, NULL);
   } else if (option == 2) {
     char artist[20];
@@ -485,9 +528,17 @@ int compare_strings(char *str1, char *str2)
   int i = 0;
   while (*(str1_lower + i) != '\0' && *(str2_lower + i) != '\0')
   {
+    //printf("%c < %c\n",*(str2_lower + i), *(str1_lower + i));
     if (*(str2_lower + i) < *(str1_lower + i))
     {
+     // printf("%c is less than %c\n",*(str2_lower + i), *(str1_lower + i));
       return 1;
+    }
+
+    if (*(str2_lower + i) > *(str1_lower + i))
+    {
+      //printf("%c is less than %c\n",*(str2_lower + i), *(str1_lower + i));
+      return 0;
     }
     i++;
   }
@@ -518,64 +569,124 @@ void sort_by_artist(Node **playlist)
   }
   list_size--;
 
-  for (int i = 0; i < list_size; i++)
+  //print_list_small(*playlist);
+  int swap_happened = 1;
+  while (swap_happened)
   {
+    swap_happened = 0;
     node = *playlist;
-    printf("5\n");
-    for (int j = 0; j < list_size; j++)
+    while (node != NULL && node->next != NULL)
     {
       // is str 2 is less than str1
       int swap = 0;
-      if (node ->next != NULL)
+      swap = compare_strings(node->data.artist, node->next->data.artist);
+      if (swap) 
       {
-        swap = compare_strings(node->data.artist, node->next->data.artist);
-      }
+        swap_happened = 1;
 
-      Node *tail = node->prev;
-      Node *head = NULL;
-      Node *back = node->next;
-      Node *front = node;
+        Node *tail = node->prev;
+        Node *head = node->next->next;
 
-      if (node->next != NULL)
-      {
-        head = node->next->next;
-      }
+        Node *back = node->next;
+        Node *front = node;
+        //printf("curNode %s nextNode %s \n", node->next->data.artist, node->data.artist);
 
-      if(tail != NULL)
-      {
-        tail->next = back;
-        tail->next->next = front;
-        back->prev = tail;
+        //printf("%d %s\n", swap, node->data.artist);
+
         front->prev = back;
         front->next = head;
+
+        back->next = front;
+        back->prev = tail;
+
+        if (tail != NULL)
+        {
+          tail->next = back;
+        }
+        else 
+        {
+          *playlist = back;
+        }
+
         if (head != NULL)
         {
           head->prev = front;
         }
       }
-
-      else {
-        *playlist = node->next;
-        (*playlist)->next = node;
-        (*playlist)->next->next = head;
-        (*playlist)->next->prev = *playlist;
-        (*playlist)->next->next->prev = (*playlist)->next->next;
-      }
-
-      //printf("%d %s:%s\n", swap, node->data.artist, node->next->data.artist);
-      printf("%s\n", node->data.artist);
-
-
+      //printf("-------------------------\n");
+      //print_list_small(*playlist);
       node = node->next;
     }
-    printf("\n");
+    //printf("\nFULL LOOP\n");
   }
 
 }
 
 void sort_by_album_title(Node **playlist)
 {
-  // bubble sort
+   // bubble sort
+  Node *node = *playlist;
+  int list_size = 0;
+  while (node != NULL)
+  {
+    node = node->next;
+    list_size++;
+  }
+  list_size--;
+
+  //print_list_small(*playlist);
+  int swap_happened = 1;
+  while (swap_happened)
+  {
+    swap_happened = 0;
+    node = *playlist;
+    while (node != NULL && node->next != NULL)
+    {
+      // is str 2 is less than str1
+      int swap = 0;
+      swap = compare_strings(node->data.album_title, node->next->data.album_title);
+      if (swap) 
+      {
+        swap_happened = 1;
+
+        Node *tail = node->prev;
+        Node *head = node->next->next;
+
+        Node *back = node->next;
+        Node *front = node;
+        //printf("curNode %s nextNode %s \n", node->next->data.artist, node->data.artist);
+
+        //printf("%d %s\n", swap, node->data.artist);
+
+        front->prev = back;
+        front->next = head;
+
+        back->next = front;
+        back->prev = tail;
+
+        if (tail != NULL)
+        {
+          tail->next = back;
+        }
+        else 
+        {
+          *playlist = back;
+        }
+
+        if (head != NULL)
+        {
+          head->prev = front;
+        }
+      }
+      //printf("-------------------------\n");
+      //print_list_small(*playlist);
+      node = node->next;
+    }
+    //printf("\nFULL LOOP\n");
+  }
+
+ // bubble sort
+  
 
 }
 void sort_by_rating(Node **playlist)
@@ -624,7 +735,74 @@ void sort_by_rating(Node **playlist)
 }
 
 void sort_by_times_played(Node **playlist)
-{
+{   // bubble sort
+  Node *node = *playlist;
+  int list_size = 0;
+  while (node != NULL)
+  {
+    node = node->next;
+    list_size++;
+  }
+  list_size--;
+
+  //print_list_small(*playlist);
+  int swap_happened = 1;
+  while (swap_happened)
+  {
+    swap_happened = 0;
+    node = *playlist;
+    while (node != NULL && node->next != NULL)
+    {
+      // is str 2 is less than str1
+      int swap = 0;
+      if (node->data.times_played < node->next->data.times_played)
+      {
+        swap = 1;
+      }
+      if (swap) 
+      {
+        swap_happened = 1;
+
+        Node *tail = node->prev;
+        Node *head = node->next->next;
+
+        Node *back = node->next;
+        Node *front = node;
+        //printf("curNode %s nextNode %s \n", node->next->data.artist, node->data.artist);
+
+        //printf("%d %s\n", swap, node->data.artist);
+
+        front->prev = back;
+        front->next = head;
+
+        back->next = front;
+        back->prev = tail;
+
+        if (tail != NULL)
+        {
+          tail->next = back;
+        }
+        else 
+        {
+          *playlist = back;
+        }
+
+        if (head != NULL)
+        {
+          head->prev = front;
+        }
+      }
+      //printf("-------------------------\n");
+      //print_list_small(*playlist);
+      node = node->next;
+    }
+    //printf("\nFULL LOOP\n");
+  }
+
+ // bubble sort
+  
+
+
 
 }
 
@@ -650,7 +828,71 @@ void sort(Node **playlist)
   }
 }
 
-void shuffle() {}
+void shuffle(Node **playlist) 
+{
+  //count nodes in list
+  int list_size = 0;
+  Node *node = *playlist;
+  while (node != NULL)
+  {
+    list_size++;
+    node = node->next;
+  }
+  node = *playlist;
+
+  Node *list_order[list_size]; 
+  char played[list_size][30];
+  int index = 0;
+
+  int dir = 1;
+  int random_number = rand() % list_size;
+  while(index != list_size)
+  {
+    int random_number = rand() % list_size;    
+
+    while (random_number != 0) {
+      if (dir == 1 && node->next == NULL)
+      {
+        dir = 0;
+      }
+
+      if (dir == 0 && node->prev == NULL)
+      {
+        dir = 1;
+      }
+
+      if (dir == 1)
+      {
+        node = node->next;
+      }
+
+      if (dir == 0)
+      {
+        node = node->prev;
+      }
+      random_number--;
+    }
+
+    int been_played = 0;
+    for (int i = 0; i < list_size; i++)
+    {
+      if (strcmp(node->data.song_title, played[i]) == 0) 
+      {
+        been_played = 1;
+      }
+    }
+
+    if (!been_played)
+    {
+      strcpy(played[index++], node->data.song_title);
+      clear();
+      print_record(&node->data);
+      node->data.times_played++;
+      sleep(1);
+    }
+  }
+  clear();
+}
 
 void execute_option(Node **playlist, int option_selected) {
   switch (option_selected) {
@@ -682,7 +924,7 @@ void execute_option(Node **playlist, int option_selected) {
     play(playlist);
     break;
   case 10:
-    shuffle();
+    shuffle(playlist);
     break;
   }
 }

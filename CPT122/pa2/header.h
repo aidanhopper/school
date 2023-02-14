@@ -7,6 +7,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <time.h>
 
 typedef struct {
   int seconds;
@@ -34,3 +35,11 @@ typedef struct node {
 int menu();
 void execute_option(Node **playlist, int option_selected);
 void store(Node **playlist);
+int compare_strings(char *str1, char *str2);
+void load(Node **playlist);
+void shuffle(Node **playlist);
+void insert(Node **playlist);
+void test_shuffle();
+void delete(Node **playlist);
+void test_insert();
+void test_delete();
