@@ -1,2 +1,2 @@
 main:
-	g++ main.c functions.c
+	g++ main.cpp functions.cpp

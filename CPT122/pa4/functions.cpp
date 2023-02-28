@@ -3,14 +3,14 @@
 // DietPlan definitions
 DietPlan::DietPlan() {
   this->goal = 0;
-  name = "";
-  date = "";
+  this->name.assign("");
+  this->date.assign("");
 }
 
-DietPlan::DietPlan(int goal, std::string name, std::string date) {
+DietPlan::DietPlan(int goal, const char *name, const char *date) {
   this->goal = goal;
-  this->name = name;
-  this->date = date;
+  this->name.assign(name);
+  this->name.assign(date);
 }
 
 DietPlan::~DietPlan() {}
@@ -23,36 +23,36 @@ std::string DietPlan::getDate() { return this->date; }
 
 void DietPlan::setGoal(int goal) { this->goal = goal; }
 
-void DietPlan::setName(std::string name) { this->name = name; }
+void DietPlan::setName(std::string name) { this->name.assign(name); }
 
-void DietPlan::setDate(std::string date) { this->date = date; }
+void DietPlan::setDate(std::string date) { this->date.assign(date); }
 
 // Exercise Plan definitons
 ExercisePlan::ExercisePlan() {
   this->goal = 0;
-  name = "";
-  date = "";
+  name = new std::string("");
+  date = new std::string("");
 }
 
 ExercisePlan::ExercisePlan(int goal, std::string name, std::string date) {
   this->goal = goal;
-  this->name = name;
-  this->date = date;
+  this->name = new std::string(name);
+  this->date = new std::string(date);
 }
 
 ExercisePlan::~ExercisePlan() {}
 
 int ExercisePlan::getGoal() { return this->goal; }
 
-std::string ExercisePlan::getName() { return this->name; }
+std::string *ExercisePlan::getName() { return this->name; }
 
-std::string ExercisePlan::getDate() { return this->date; }
+std::string *ExercisePlan::getDate() { return this->date; }
 
 void ExercisePlan::setGoal(int goal) { this->goal = goal; }
 
-void ExercisePlan::setName(std::string name) { this->name = name; }
+void ExercisePlan::setName(std::string name) { *this->name = name; }
 
-void ExercisePlan::setDate(std::string date) { this->date = date; }
+void ExercisePlan::setDate(std::string date) { *this->date = date; }
 
 // ListNode defintions
 ListNode::ListNode() {
@@ -75,10 +75,6 @@ void ListNode::setPrev(ListNode *node) {
   this->prevNode = node;
 }
 
-Data ListNode::getData() {
-  return this->data;
-}
-
 ListNode *ListNode::next() {
   return this->nextNode;
 }
@@ -89,17 +85,31 @@ ListNode *ListNode::prev() {
 
 List::List() {
   this->headNode = NULL;
-  this->curNode = NULL;
-}
-
-ListNode *List::createNode(Data data) {
-  ListNode *node = new ListNode(data, this->headNode, NULL);
-  return node;
 }
 
 List::List(Data data) {
-  List::createNode(data);
+  ListNode *node = new ListNode(data, NULL, NULL);
+  this->headNode = node;
+  this->curNode = this->headNode;
 }
 
+Data ListNode::getData() {
+  return this->data;
+}
+
+void List::print() {
+  ListNode *node = this->headNode;
+  while (node != NULL) {
+    Data dat = node->getData();
+    if (dat.id == Data::DIET) {
+      std::cout << dat.diet.getName() << "->";
+    }
+    else if (dat.id == Data::EXERCISE) {
+      std::cout << dat.exercise.getName() << "->";
+    }
+    node = node->next();
+  }
+  std::cout << std::endl;
+}
 
 

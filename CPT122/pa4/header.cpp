@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <string.h>
 
 class DietPlan {
 private:
@@ -12,7 +13,7 @@ private:
 
 public:
   DietPlan();
-  DietPlan(int goal, std::string name, std::string date);
+  DietPlan(int goal, const char *name, const char *date);
   ~DietPlan();
   int getGoal();
   std::string getName();
@@ -26,16 +27,16 @@ public:
 class ExercisePlan {
 private:
   int goal;
-  std::string name;
-  std::string date;
+  std::string *name;
+  std::string *date;
 
 public:
   ExercisePlan();
   ExercisePlan(int goal, std::string name, std::string date);
   ~ExercisePlan();
   int getGoal();
-  std::string getName();
-  std::string getDate();
+  std::string *getName();
+  std::string *getDate();
   void setGoal(int goal);
   void setName(std::string name);
   void setDate(std::string date);
@@ -49,10 +50,8 @@ public:
 
 struct Data {
   enum { NONE, EXERCISE, DIET } id;
-  struct {
-    ExercisePlan exercise;
-    DietPlan diet;
-  };
+  ExercisePlan exercise;
+  DietPlan diet;
 };
 
 class ListNode {
@@ -80,12 +79,10 @@ public:
   List();
   List(Data data);
   ~List();
-  ListNode *createNode(Data data);
-  ListNode *next();
-  ListNode *prev();
   void setHead();
-  void setCurNode();
-  Data getData();
+  void print();
 };
 
 #endif
+
+
