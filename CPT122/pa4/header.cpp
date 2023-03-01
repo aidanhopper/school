@@ -1,9 +1,15 @@
 #ifndef HEADER_CPP
 #define HEADER_CPP
 
+#include <fstream>
 #include <iostream>
 #include <string>
-#include <string.h>
+
+typedef enum {
+  NONE,
+  DIET,
+  EXERCISE,
+} Type;
 
 class DietPlan {
 private:
@@ -27,29 +33,23 @@ public:
 class ExercisePlan {
 private:
   int goal;
-  std::string *name;
-  std::string *date;
+  std::string name;
+  std::string date;
 
 public:
   ExercisePlan();
-  ExercisePlan(int goal, std::string name, std::string date);
+  ExercisePlan(int goal, const char *name, const char *date);
   ~ExercisePlan();
   int getGoal();
-  std::string *getName();
-  std::string *getDate();
+  std::string getName();
+  std::string getDate();
   void setGoal(int goal);
   void setName(std::string name);
   void setDate(std::string date);
   void editGoal();
 };
 
-class FitnessAppWrapper {
-private:
-public:
-};
-
 struct Data {
-  enum { NONE, EXERCISE, DIET } id;
   ExercisePlan exercise;
   DietPlan diet;
 };
@@ -62,7 +62,7 @@ private:
 
 public:
   ListNode();
-  ListNode(Data data, ListNode *nextNode, ListNode *prevNode);
+  ListNode(Data &data, ListNode *nextNode, ListNode *prevNode);
   ListNode *next();
   ListNode *prev();
   void setNext(ListNode *node);
@@ -74,15 +74,39 @@ class List {
 private:
   ListNode *headNode;
   ListNode *curNode;
-
+  Type id;
 public:
   List();
-  List(Data data);
+  List(Data &data, Type id);
   ~List();
-  void setHead();
+  void setHeadNode(ListNode *headNode);
+  ListNode *getHeadNode();
   void print();
+  void insertInFront(Data &data);
+  void insertAtEnd(Data &data);
 };
 
 #endif
 
+class FitnessAppWrapper {
+private:
+  List dietList;
+  List exerciseList;
+public:
+  void runApp();
 
+  void loadDailyDietPlan(std::fstream &fileStream, Data &data);
+  void loadWeeklDietPlan(std::fstream &fileStream, List &list);
+  void displayDailyDietPlan();
+  void displayWeeklyDietPlan();
+  void storeDailyDietPlan();
+
+  void loadDailyExercisePlan(std::fstream &fileStream, Data &data);
+  void loadWeeklExercisePlan(std::fstream &fileStream, List &list);
+  void displayDailyExercisePlan();
+  void displayWeeklyExercisePlan();
+  void storeDailyExercisePlan();
+
+  int displayMenu();
+  
+};
