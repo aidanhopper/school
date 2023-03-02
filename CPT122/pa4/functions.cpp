@@ -1,4 +1,9 @@
 #include "header.cpp"
+#include <fstream>
+#include <ios>
+#include <iostream>
+#include <pthread.h>
+#include <string>
 
 // DietPlan definitions
 DietPlan::DietPlan() {
@@ -127,4 +132,200 @@ void List::insertAtEnd(Data &data) {
   }
 }
 
+List::List(Type id) {
+  this->id = id;
+  this->setHeadNode(NULL);
+}
+
 List::~List() {}
+
+FitnessAppWrapper::FitnessAppWrapper() {
+  this->dietList = List(Type::DIET);
+  this->exerciseList = List(Type::EXERCISE);
+}
+
+int FitnessAppWrapper::displayMenu() {
+  printf("Select an option\n"
+         "1. Load weekly diet plan from file.\n"
+         "2. Load weekly exercise plan from file.\n"
+         "3. Store weekly diet plan to file.\n"
+         "4. Store weekly exercise plan to file.\n"
+         "5. Display weekly diet plan to screen.\n"
+         "6. Display weekly exercise plan to screen.\n"
+         "7. Edit daily diet plan.\n"
+         "8. Edit daily exercise plan.\n"
+         "9. Exit\n");
+  int input;
+  std::cin >> input;
+  return input;
+}
+
+void FitnessAppWrapper::runApp() {
+  int option_selected = -1;
+  while (option_selected != 9) {
+    option_selected = this->displayMenu();
+    this->executeOption(option_selected);
+  }
+  // save
+}
+void FitnessAppWrapper::executeOption(int option_selected) {
+  this->dietStream = std::fstream("./dietPlans.txt");
+  this->exerciseStream = std::fstream("./exercisePlans.txt");
+  switch (option_selected) {
+  case 1:
+    this->loadWeeklyDietPlan(this->dietStream, this->dietList);
+    break;
+  case 2:
+    this->loadWeeklyExercisePlan(this->exerciseStream, this->exerciseList);
+    break;
+  case 3:
+    this->storeWeeklyDietPlan(this->dietStream, this->dietList);
+    break;
+  case 4:
+    this->storeWeeklyExercisePlan(this->exerciseStream, this->exerciseList);
+    break;
+  case 5:
+    this->displayWeeklyDietPlan(this->dietList);
+    break;
+  case 6:
+    this->displayWeeklyExercisePlan(this->exerciseList);
+    break;
+  }
+  dietStream.close();
+  exerciseStream.close();
+}
+
+void FitnessAppWrapper::loadDailyDietPlan(std::fstream &fileStream,
+                                          Data &data) {
+  fileStream >> data.diet;
+}
+
+void FitnessAppWrapper::loadWeeklyDietPlan(std::fstream &fileStream,
+                                           List &list) {
+  Data data;
+  for (int i = 0; i < 7; i++) {
+    this->loadDailyDietPlan(fileStream, data);
+    list.insertAtEnd(data);
+  }
+}
+
+void FitnessAppWrapper::loadDailyExercisePlan(std::fstream &fileStream,
+                                              Data &data) {
+  fileStream >> data.exercise;
+}
+
+void FitnessAppWrapper::loadWeeklyExercisePlan(std::fstream &fileStream,
+                                               List &list) {
+  Data data;
+  for (int i = 0; i < 7; i++) {
+    this->loadDailyExercisePlan(fileStream, data);
+    list.insertAtEnd(data);
+  }
+}
+
+std::istream &operator>>(std::istream &input, ExercisePlan &plan) {
+  char line[100];
+  input.getline(line, 100, '\n');
+  plan.setName(line);
+  input.getline(line, 100, '\n');
+  plan.setGoal(std::stoi(line));
+  input.getline(line, 100, '\n');
+  plan.setDate(line);
+  input.getline(line, 100, '\n');
+  return input;
+}
+
+std::ostream &operator<<(std::ostream &output, ExercisePlan &plan) {
+  output << "Plan name: " << plan.getName() << std::endl
+         << "Goal: " << plan.getGoal() << std::endl
+         << "Date: " << plan.getDate() << std::endl;
+  return output;
+}
+
+std::istream &operator>>(std::istream &input, DietPlan &plan) {
+  char line[100];
+  input.getline(line, 100, '\n');
+  plan.setName(line);
+  input.getline(line, 100, '\n');
+  plan.setGoal(std::stoi(line));
+  input.getline(line, 100, '\n');
+  plan.setDate(line);
+  input.getline(line, 100, '\n');
+  return input;
+}
+
+std::ostream &operator<<(std::ostream &output, DietPlan &plan) {
+  output << "Plan name: " << plan.getName() << std::endl
+         << "Goal: " << plan.getGoal() << std::endl
+         << "Date: " << plan.getDate() << std::endl;
+  return output;
+}
+
+std::fstream &operator<<(std::fstream &output, DietPlan &plan) {
+  output << plan.getName() << std::endl
+         << plan.getGoal() << std::endl
+         << plan.getDate() << std::endl
+         << std::endl;
+  return output;
+}
+
+std::fstream &operator<<(std::fstream &output, ExercisePlan &plan) {
+  output << plan.getName() << std::endl
+         << plan.getGoal() << std::endl
+         << plan.getDate() << std::endl
+         << std::endl;
+  return output;
+}
+
+
+void FitnessAppWrapper::displayWeeklyDietPlan(List &list) {
+  ListNode *node = list.getHeadNode();
+  while (node != NULL) {
+    DietPlan plan = node->getData().diet;
+    this->displayDailyDietPlan(plan);
+    node = node->next();
+  }
+}
+
+void FitnessAppWrapper::displayDailyDietPlan(DietPlan &plan) {
+  std::cout << plan;
+}
+
+void FitnessAppWrapper::displayWeeklyExercisePlan(List &list) {
+  ListNode *node = list.getHeadNode();
+  while (node != NULL) {
+    ExercisePlan plan = node->getData().exercise;
+    this->displayDailyExercisePlan(plan);
+    node = node->next();
+  }
+}
+
+void FitnessAppWrapper::displayDailyExercisePlan(ExercisePlan &plan) {
+  std::cout << plan;
+}
+
+void FitnessAppWrapper::storeDailyDietPlan(std::fstream &dietStream, DietPlan &plan) {
+  dietStream << plan;
+}
+
+void FitnessAppWrapper::storeWeeklyDietPlan(std::fstream &dietStream, List &list) {
+  ListNode *node = list.getHeadNode();  
+  while (node != NULL) {
+    DietPlan plan = node->getData().diet;
+    this->storeDailyDietPlan(dietStream, plan);
+    node = node->next();
+  }
+}
+
+void FitnessAppWrapper::storeDailyExercisePlan(std::fstream &exerciseStream, ExercisePlan &plan) {
+  exerciseStream << plan;
+}
+
+void FitnessAppWrapper::storeWeeklyExercisePlan(std::fstream &exerciseStream, List &list) {
+  ListNode *node = list.getHeadNode();  
+  while (node != NULL) {
+    ExercisePlan plan = node->getData().exercise;
+    this->storeDailyExercisePlan(exerciseStream, plan);
+    node = node->next();
+  }
+}

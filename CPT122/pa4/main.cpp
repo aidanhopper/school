@@ -2,9 +2,7 @@
 
 int main()
 {
-  Data dat;
-  dat.exercise = ExercisePlan(1231, "asdf", "123");
-  List list = List(dat, Type::EXERCISE);
-  list.print();
+  FitnessAppWrapper app = FitnessAppWrapper();
+  app.runApp();
   return 0;
 }

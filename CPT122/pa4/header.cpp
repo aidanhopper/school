@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <istream>
 #include <string>
 
 typedef enum {
@@ -75,8 +76,10 @@ private:
   ListNode *headNode;
   ListNode *curNode;
   Type id;
+
 public:
   List();
+  List(Type id);
   List(Data &data, Type id);
   ~List();
   void setHeadNode(ListNode *headNode);
@@ -92,21 +95,35 @@ class FitnessAppWrapper {
 private:
   List dietList;
   List exerciseList;
+  std::fstream dietStream;
+  std::fstream exerciseStream;
+
 public:
+  FitnessAppWrapper();
+
   void runApp();
 
   void loadDailyDietPlan(std::fstream &fileStream, Data &data);
-  void loadWeeklDietPlan(std::fstream &fileStream, List &list);
-  void displayDailyDietPlan();
-  void displayWeeklyDietPlan();
-  void storeDailyDietPlan();
+  void loadWeeklyDietPlan(std::fstream &fileStream, List &list);
+  void displayDailyDietPlan(DietPlan &plan);
+  void displayWeeklyDietPlan(List &list);
+  void storeDailyDietPlan(std::fstream &dietStream, DietPlan &dietPlan);
+  void storeWeeklyDietPlan(std::fstream &dietStream, List &list);
 
   void loadDailyExercisePlan(std::fstream &fileStream, Data &data);
-  void loadWeeklExercisePlan(std::fstream &fileStream, List &list);
-  void displayDailyExercisePlan();
-  void displayWeeklyExercisePlan();
-  void storeDailyExercisePlan();
+  void loadWeeklyExercisePlan(std::fstream &fileStream, List &list);
+  void displayDailyExercisePlan(ExercisePlan &plan);
+  void displayWeeklyExercisePlan(List &list);
+  void storeDailyExercisePlan(std::fstream &exerciseStream, ExercisePlan &exercisePlan);
+  void storeWeeklyExercisePlan(std::fstream &exerciseStream, List &list);
 
   int displayMenu();
-  
+  void executeOption(int option_selected);
 };
+
+std::istream &operator>>(std::istream &input, DietPlan &plan);
+std::istream &operator>>(std::istream &input, ExercisePlan &plan);
+std::ostream &operator<<(std::ostream &output, DietPlan &plan);
+std::ostream &operator<<(std::ostream &output, ExercisePlan &plan);
+std::fstream &operator<<(std::fstream &output, DietPlan &plan);
+std::fstream &operator<<(std::fstream &output, ExercisePlan &plan);
