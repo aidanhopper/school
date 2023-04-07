@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <fstream>
+#include <iostream>
 #include <string>
 
 typedef struct {
@@ -13,6 +14,8 @@ typedef struct {
   int units;
   std::string program;
   std::string level;
+  int absences;
+  // insert stack here
 } Data;
 
 template <class T> class ListNode {
@@ -37,11 +40,13 @@ public:
   List();
   void insert(T &data);
   void print();
+  void write(std::ofstream &file);
+  ListNode<T> *getHead();
   ~List();
 };
 
 template <class T> ListNode<T>::ListNode(T &data) {
-  std::memcpy(this->data, data, sizeof this->data);
+  this->data = data;
   this->next = NULL;
 }
 
@@ -59,31 +64,44 @@ template <class T> void List<T>::insert(T &data) {
   ListNode<T> *newNode = new ListNode<T>(data);
   if (newNode == NULL)
     return;
+
   if (this->head != NULL)
     newNode->setNext(this->head);
+
   this->head = newNode;
+}
+
+template <class T> ListNode<T> *List<T>::getHead() { return this->head; }
+
+template <class T> void List<T>::print() {
+  ListNode<T> *node = this->head;
+  while (node != NULL) {
+    std::cout << *node->getData() << std::endl;
+    node = node->getNext();
+  }
+}
+
+template <class T> void List<T>::write(std::ofstream &file) {
+  ListNode<T> *node = this->head;
+  while (node != NULL) {
+    file << *node->getData() << std::endl;
+    node = node->getNext();
+  }
 }
 
 template <class T> void List<T>::destroyList() {
   ListNode<T> *tmp = this->head;
-  ListNode<T> *tmpNext = NULL;
+  ListNode<T> *tmpPrev = NULL;
 
   while (tmp != NULL) {
-    tmpNext = tmp->getNext();
-    delete tmp;
+    tmpPrev = tmp;
+    tmp = tmp->getNext();
+    delete tmpPrev;
   }
 
   this->head = NULL;
 }
 
 template <class T> List<T>::~List() { this->destroyList(); }
-
-std::ostream &operator<<(std::ostream &input, Data &data) {
-
-  input << data.record << "," << data.id << "," << data.name << ","
-        << data.email << "," << data.units << "," << data.program << ","
-        << data.level << "," << std::endl;
-  return input;
-}
 
 #endif
