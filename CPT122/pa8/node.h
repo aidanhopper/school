@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 
 class Node {
 private:
@@ -14,12 +15,12 @@ protected:
 
 public:
   Node(std::string &mData);
-  ~Node();
+  virtual ~Node();
   Node *&getLeft();
   Node *&getRight();
   std::string &getData();
-  void setLeft(Node *&mpLeft);
-  void setRight(Node *&mpRight);
+  void setLeft(Node *mpLeft);
+  void setRight(Node *mpRight);
   void setData(std::string &mData);
   virtual void printData();
 };
@@ -39,7 +40,7 @@ public:
 class BST {
 private:
   Node *mpRoot;
-  void destroyTree();
+  void destroyTree(Node *root);
   void insert(Node *&node, std::string &mData, int &mUnits);
   void inOrderTraversal(Node *&node);
 
