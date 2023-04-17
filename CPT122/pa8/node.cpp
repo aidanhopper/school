@@ -60,17 +60,21 @@ void BST::insert(Node *&node, std::string &mData, int &mUnits) {
   if (this->mpRoot == NULL) {
     TransactionNode *newNode = new TransactionNode(mData, mUnits);
     this->mpRoot = newNode;
-  }
-  if (node == NULL)
     return;
-  if (node->getLeft() == NULL &&
+  }
+  else if (node == NULL)
+    return;
+  else if (node->getLeft() == NULL &&
       ((TransactionNode *)node)->getUnits() < mUnits) {
     TransactionNode *newNode = new TransactionNode(mData, mUnits);
-    node->setRight(newNode);
+    node->setLeft(newNode);
+    std::cout << node->getLeft()->getData() << std::endl;
+    return;
   } else if (node->getRight() == NULL &&
              ((TransactionNode *)node)->getUnits() > mUnits) {
     TransactionNode *newNode = new TransactionNode(mData, mUnits);
-    node->setLeft(newNode);
+    node->setRight(newNode);
+    return;
   }
   insert(node->getLeft(), mData, mUnits);
   insert(node->getRight(), mData, mUnits);
