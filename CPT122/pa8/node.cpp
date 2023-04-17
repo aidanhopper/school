@@ -11,7 +11,7 @@ void Node::printData() {}
 
 Node *&Node::getLeft() { return this->mpLeft; }
 
-Node *&Node::getRight() { return this->mpLeft; }
+Node *&Node::getRight() { return this->mpRight; }
 
 std::string &Node::getData() { return this->mData; }
 
@@ -24,6 +24,7 @@ void Node::setData(std::string &mData) { this->mData = mData; }
 TransactionNode::TransactionNode(std::string &mData, int &mUnits)
     : Node(mData) {
   this->mData = mData;
+  this->mUnits = mUnits;
 }
 
 TransactionNode::~TransactionNode() {}
@@ -33,12 +34,12 @@ int TransactionNode::getUnits() { return this->mUnits; }
 void TransactionNode::setUnits(int mUnits) { this->mUnits = mUnits; }
 
 void TransactionNode::printData() {
-  std::cout << this->mUnits << ":" << this->mData;
+  std::cout << this->mUnits << ":" << this->mData << std::endl;
 }
 
 BST::BST() { this->mpRoot = NULL; }
 
-BST::~BST() { this->destroyTree(this->mpRoot); }
+BST::~BST() {}
 
 void BST::destroyTree(Node *node) {
   if (node == NULL)
@@ -62,22 +63,23 @@ void BST::insert(Node *&node, std::string &mData, int &mUnits) {
     this->mpRoot = newNode;
     return;
   }
-  else if (node == NULL)
+  if (node == NULL)
     return;
-  else if (node->getLeft() == NULL &&
-      ((TransactionNode *)node)->getUnits() < mUnits) {
-    TransactionNode *newNode = new TransactionNode(mData, mUnits);
-    node->setLeft(newNode);
-    std::cout << node->getLeft()->getData() << std::endl;
-    return;
-  } else if (node->getRight() == NULL &&
-             ((TransactionNode *)node)->getUnits() > mUnits) {
-    TransactionNode *newNode = new TransactionNode(mData, mUnits);
-    node->setRight(newNode);
-    return;
+  if (((TransactionNode *)node)->getUnits() > mUnits) {
+    if (node->getLeft() == NULL) {
+      TransactionNode *newNode = new TransactionNode(mData, mUnits);
+      node->setLeft((Node *)newNode);
+      return;
+    }
+    insert(node->getLeft(), mData, mUnits);
+  } else if (((TransactionNode *)node)->getUnits() < mUnits) {
+    if (node->getRight() == NULL) {
+      TransactionNode *newNode = new TransactionNode(mData, mUnits);
+      node->setRight((Node *)newNode);
+      return;
+    }
+    insert(node->getRight(), mData, mUnits);
   }
-  insert(node->getLeft(), mData, mUnits);
-  insert(node->getRight(), mData, mUnits);
 }
 
 void BST::inOrderTraversal() { this->inOrderTraversal(this->mpRoot); }
@@ -86,8 +88,6 @@ void BST::inOrderTraversal(Node *&node) {
   if (node == NULL)
     return;
   this->inOrderTraversal(node->getLeft());
-  std::cout << "HI"
-            << " ";
   ((TransactionNode *)node)->printData();
   this->inOrderTraversal(node->getRight());
 }

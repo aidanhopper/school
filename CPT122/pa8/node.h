@@ -55,10 +55,5 @@ public:
   TransactionNode &findLargest();
 };
 
-class DataAnalysis {
-private:
-
-public:
-};
 
 #endif
