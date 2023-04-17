@@ -1,5 +1,6 @@
 #include "dataAnalysis.h"
 
+// init the bst's
 DataAnalysis::DataAnalysis() {
   this->mTreePurchased = BST();
   this->mTreeSold = BST();
@@ -8,6 +9,7 @@ DataAnalysis::DataAnalysis() {
 void DataAnalysis::openFile() { this->mCsvStream.open("./data.csv"); }
 
 void DataAnalysis::readFile() {
+  // reads the file
   std::string line;
   std::getline(this->mCsvStream, line);
   while (std::getline(this->mCsvStream, line))
@@ -19,6 +21,7 @@ void DataAnalysis::readFile() {
 }
 
 void DataAnalysis::readLine(std::string &line) {
+  // reads the line and tokenizes it
   char del = ',';
   std::string strunits;
   std::string type;
@@ -36,6 +39,7 @@ void DataAnalysis::readLine(std::string &line) {
     }
   }
   int units = std::stoi(strunits);
+  // inseting into correct tree
   this->insertIntoTree(soldItem, type, units);
 }
 
@@ -48,6 +52,7 @@ void DataAnalysis::insertIntoTree(int &isSold, std::string &type, int &units) {
 }
 
 void DataAnalysis::printAnalysis() {
+  // analusis
   TransactionNode leastPurchased = mTreePurchased.findSmallest();
   TransactionNode leastSold = mTreeSold.findSmallest();
   TransactionNode mostPurchased = mTreePurchased.findLargest();
@@ -67,6 +72,7 @@ void DataAnalysis::printAnalysis() {
 }
 
 void DataAnalysis::runAnalysis() {
+  // run the stuff
   openFile();
   readFile();
   printAnalysis();

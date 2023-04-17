@@ -65,6 +65,7 @@ void BST::insert(Node *&node, std::string &mData, int &mUnits) {
   }
   if (node == NULL)
     return;
+  // have to cast node so get units can be called
   if (((TransactionNode *)node)->getUnits() > mUnits) {
     if (node->getLeft() == NULL) {
       TransactionNode *newNode = new TransactionNode(mData, mUnits);
@@ -92,6 +93,7 @@ void BST::inOrderTraversal(Node *&node) {
   this->inOrderTraversal(node->getRight());
 }
 
+// returns furthest left node
 TransactionNode &BST::findSmallest() {
   Node *node = this->getRoot();
   while (node->getLeft() != NULL)
@@ -100,6 +102,7 @@ TransactionNode &BST::findSmallest() {
   return *tmp;
 }
 
+// returns furthest right node
 TransactionNode &BST::findLargest() {
   Node *node = this->getRoot();
   while (node->getRight() != NULL)
