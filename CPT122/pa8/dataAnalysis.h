@@ -8,15 +8,16 @@ private:
   BST mTreeSold;
   BST mTreePurchased;
   std::ifstream mCsvStream;
+  void openFile();
+  void readLine(std::string &line);
+  void readFile();
+  void insertIntoTree(int isSold);
+  void insertIntoTree(int &isSold, std::string &type, int &units);
+  void printAnalysis();
 
 public:
-  void openFile();
-  void readLine();
-  void readFile();
-  void insertIntoTree();
-  void printAnalysis();
+  DataAnalysis();
   void runAnalysis();
-
 };
 
 #endif

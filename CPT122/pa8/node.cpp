@@ -39,7 +39,7 @@ void TransactionNode::printData() {
 
 BST::BST() { this->mpRoot = NULL; }
 
-BST::~BST() {}
+BST::~BST() { destroyTree(this->mpRoot); }
 
 void BST::destroyTree(Node *node) {
   if (node == NULL)
